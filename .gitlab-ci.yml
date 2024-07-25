@@ -64,8 +64,9 @@ trigger_pagerduty_incident:
         -H "Authorization: Bearer ${PORT_CLIENT_ID}:${PORT_CLIENT_SECRET}" \
         -d '{"logMessage": "PagerDuty incident triggered! ✅"}' \
         https://api.getport.io/actions/${PORT_RUN_ID}/logs
-  only:
-    - master
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "trigger"'
+    - if: '$CI_COMMIT_REF_NAME == "main" || $CI_COMMIT_REF_NAME == "master"'
   variables:
     PAGERDUTY_API_KEY: ${{ secrets.PAGERDUTY_API_KEY }}
     PORT_CLIENT_ID: ${{ secrets.PORT_CLIENT_ID }}
