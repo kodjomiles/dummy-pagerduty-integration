@@ -5,7 +5,7 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "Testing slack integration PR 2"}
+    return {"message": "Testing slack integration PR 3"}
 
 
 @app.get("/hello/{name}")
